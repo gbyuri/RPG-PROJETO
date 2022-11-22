@@ -9,11 +9,16 @@ Var
    FOR,DES,INTE,HPJOGADOR,HPMAXJOGADOR,ATKJOGADOR,ACERTO,DEFJOGADOR,EXPJOGADOR,EXPMAXJOGADOR:INTEIRO
    DANOMIN,DANOMAX:REAL
 
-   N,C,EX,H,J,P,A: INTEIRO
+   XMONSTRO,MONSTROY:INTEIRO
+   MONSTRO:CARACTERE
+   MONSTROLEVEL,MONSTROHP,MONSTROHPMAX,MONSTROATK,MONSTRODEF,MONSTROEXP:INTEIRO
+   MONSTRODANOMIN,MONSTRODANOMAX:REAL
+
+   N,C,EX,H,J,P,A,xa: INTEIRO
    CONTINUAR : CARACTER
 
    I,HUB:LOGICO
-   
+
    ANDAR:VETOR [1..10] DE CARACTERE
    ESCOLHAMENUPERSONAGEM:INTEIRO
    //ANIMACAO LIVRO\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -466,6 +471,27 @@ INICIO
    escreval("                                                               |___________________________________________________________________ |")
 FIMPROCEDIMENTO
 
+
+PROCEDIMENTO LOBO
+INICIO
+   ESCREVAL("                        >VOCÊ ENCONTROU UM LOBO<                 |")
+   ESCREVAL("                               > ",MONSTROLEVEL,"<               |")
+   ESCREVAL("|                       ,     ,                                  |")
+   ESCREVAL("|                       |\---/|                                  |")
+   ESCREVAL("|                      /  , , |                                  |")
+   ESCREVAL("|                 __.-'|  / \ /                                  |")
+   ESCREVAL("|        __ ___.-'        ._O|                                   |")
+   ESCREVAL("|     .-'  '        :      _/                                    |")
+   ESCREVAL("|    / ,    .        .     |                                     |")
+   ESCREVAL("|   :  ;    :        :   _/                                      |")
+   ESCREVAL("|   |  |   .'     __:   /                                        |")
+   ESCREVAL("|   |  :   /'----'| \  |                                         |")
+   ESCREVAL("|    \  |\  |      | /| |                                        |")
+   ESCREVAL("|     '.'| /       || \ |                                        |")
+   ESCREVAL("|     | /|.'       '.l \\_                                       |")
+   ESCREVAL("|     || ||             '-'                                      |")
+   ESCREVAL("|     '-''-'                                                     |")
+FIMPROCEDIMENTO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -531,115 +557,164 @@ INICIO
       CRIARPERSONAGEM
 
    SENAO
-   SE (NOMEJOGADOR <> "") E (CLASSEJOGADOR = "") ENTAO
+      SE (NOMEJOGADOR <> "") E (CLASSEJOGADOR = "") ENTAO
 
-      ANIMACAOCLASSE
+         ANIMACAOCLASSE
 
-      ESCREVAL("                                                                                        < ESCOLHA SUA CLASSE >")
-      ESCREVA("                                                                                                   ")
-      LEIA(Y)
-      ESCOLHA Y
-      CASO 1
-         CLASSEJOGADOR <- "GUERREIRO"
-         GUERREIRO <- VERDADEIRO
-         FOR<- 3
-         DES<- 1
-         INTE<-1
-         HPJOGADOR<-25 +(5*FOR)
-         HPMAXJOGADOR <- HPJOGADOR
-         ATKJOGADOR<-5 + FOR
-         DANOMIN<-(FOR+ATKJOGADOR)/2
-         DANOMAX<-(FOR+ATKJOGADOR)
-         ACERTO<-1 + DES
-         DEFJOGADOR<-15 + FOR
-         EXPJOGADOR <- 0
-         EXPMAXJOGADOR <- 10
-         LIMPATELA
-         TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
-         CRIARPERSONAGEM
+         ESCREVAL("                                                                                        < ESCOLHA SUA CLASSE >")
+         ESCREVA("                                                                                                   ")
+         LEIA(Y)
+         ESCOLHA Y
+         CASO 1
+            CLASSEJOGADOR <- "GUERREIRO"
+            GUERREIRO <- VERDADEIRO
+            FOR<- 3
+            DES<- 1
+            INTE<-1
+            HPJOGADOR<-25 +(5*FOR)
+            HPMAXJOGADOR <- HPJOGADOR
+            ATKJOGADOR<-5 + FOR
+            DANOMIN<-(FOR+ATKJOGADOR)/2
+            DANOMAX<-(FOR+ATKJOGADOR)
+            ACERTO<-1 + DES
+            DEFJOGADOR<-15 + FOR
+            EXPJOGADOR <- 0
+            EXPMAXJOGADOR <- 10
+            LIMPATELA
+            TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
+            CRIARPERSONAGEM
 
-      CASO 2
-         CLASSEJOGADOR <-"ARQUEIRO"
-         ARQUEIRO <- VERDADEIRO
-         FOR<- 1
-         DES<- 3
-         INTE<-1
-         HPJOGADOR<-20 +(5*FOR)
-         HPMAXJOGADOR <- HPJOGADOR
-         ATKJOGADOR<-5 + DES
-         DANOMIN<-(DES+ATKJOGADOR)/2
-         DANOMAX<-(DES+ATKJOGADOR)
-         ACERTO<-1 + DES
-         DEFJOGADOR<-10 + FOR
-         EXPJOGADOR <- 0
-         EXPMAXJOGADOR <- 10
-         LIMPATELA
-         TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
-         CRIARPERSONAGEM
+         CASO 2
+            CLASSEJOGADOR <-"ARQUEIRO"
+            ARQUEIRO <- VERDADEIRO
+            FOR<- 1
+            DES<- 3
+            INTE<-1
+            HPJOGADOR<-20 +(5*FOR)
+            HPMAXJOGADOR <- HPJOGADOR
+            ATKJOGADOR<-5 + DES
+            DANOMIN<-(DES+ATKJOGADOR)/2
+            DANOMAX<-(DES+ATKJOGADOR)
+            ACERTO<-1 + DES
+            DEFJOGADOR<-10 + FOR
+            EXPJOGADOR <- 0
+            EXPMAXJOGADOR <- 10
+            LIMPATELA
+            TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
+            CRIARPERSONAGEM
 
 
-      CASO 3
-         CLASSEJOGADOR <- "MAGO"
-         MAGO <- VERDADEIRO
-         FOR<- 1
-         DES<- 1
-         INTE<-3
-         HPJOGADOR<-15 +(5*FOR)
-         HPMAXJOGADOR <- HPJOGADOR
-         ATKJOGADOR<-5 + INTE
-         DANOMIN<-(INTE+ATKJOGADOR)/2
-         DANOMAX<-(INTE+ATKJOGADOR)
-         ACERTO<-1 + DES
-         DEFJOGADOR<-5 + FOR
-         EXPJOGADOR <- 0
-         EXPMAXJOGADOR <- 10
-         LIMPATELA
-         TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
-         CRIARPERSONAGEM
-      FIMESCOLHA
-   SENAO
-   SE (NOMEJOGADOR <> "") E (CLASSEJOGADOR <> "") ENTAO
-      LIVRO3
-      ESCREVAL("                                                                                           < [1] OU [2] >")
-      ESCREVA("                                                                                                 ")
-      LEIA(X)
-      ESCOLHA X
-      CASO 1
-      HUB <- VERDADEIRO
-      CASO 2
-         NOMEJOGADOR <- ""
-         TAMANHONOME <- 0
-         CLASSEJOGADOR <- ""
-         TAMANHOCLASSE <- 0
-         GUERREIRO <- FALSO
-         ARQUEIRO <- FALSO
-         MAGO <- FALSO
-         FOR<- 0
-         DES<- 0
-         INTE<-0
-         HPJOGADOR<-0 +(5*FOR)
-         HPMAXJOGADOR <- HPJOGADOR
-         ATKJOGADOR<-0 + INTE
-         DANOMIN<-(INTE+ATKJOGADOR)/2
-         DANOMAX<-(INTE+ATKJOGADOR)
-         ACERTO<-0 + DES
-         DEFJOGADOR<-0 + FOR
-         EXPJOGADOR <- 0
-         EXPMAXJOGADOR <- 0
-         LIMPATELA
-         ANIMACAOX
-         CRIARPERSONAGEM
-      FIMESCOLHA
-   FIMSE
-   FIMSE
+         CASO 3
+            CLASSEJOGADOR <- "MAGO"
+            MAGO <- VERDADEIRO
+            FOR<- 1
+            DES<- 1
+            INTE<-3
+            HPJOGADOR<-15 +(5*FOR)
+            HPMAXJOGADOR <- HPJOGADOR
+            ATKJOGADOR<-5 + INTE
+            DANOMIN<-(INTE+ATKJOGADOR)/2
+            DANOMAX<-(INTE+ATKJOGADOR)
+            ACERTO<-1 + DES
+            DEFJOGADOR<-5 + FOR
+            EXPJOGADOR <- 0
+            EXPMAXJOGADOR <- 10
+            LIMPATELA
+            TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
+            CRIARPERSONAGEM
+         FIMESCOLHA
+      SENAO
+         SE (NOMEJOGADOR <> "") E (CLASSEJOGADOR <> "") ENTAO
+            LIVRO3
+            ESCREVAL("                                                                                           < [1] OU [2] >")
+            ESCREVA("                                                                                                 ")
+            LEIA(X)
+            ESCOLHA X
+            CASO 1
+               HUB <- VERDADEIRO
+            CASO 2
+               NOMEJOGADOR <- ""
+               TAMANHONOME <- 0
+               CLASSEJOGADOR <- ""
+               TAMANHOCLASSE <- 0
+               GUERREIRO <- FALSO
+               ARQUEIRO <- FALSO
+               MAGO <- FALSO
+               FOR<- 0
+               DES<- 0
+               INTE<-0
+               HPJOGADOR<-0 +(5*FOR)
+               HPMAXJOGADOR <- HPJOGADOR
+               ATKJOGADOR<-0 + INTE
+               DANOMIN<-(INTE+ATKJOGADOR)/2
+               DANOMAX<-(INTE+ATKJOGADOR)
+               ACERTO<-0 + DES
+               DEFJOGADOR<-0 + FOR
+               EXPJOGADOR <- 0
+               EXPMAXJOGADOR <- 0
+               LIMPATELA
+               ANIMACAOX
+               CRIARPERSONAGEM
+            FIMESCOLHA
+         FIMSE
+      FIMSE
    FIMSE
 
 FIMPROCEDIMENTO
+//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+PROCEDIMENTO ANDAR1
+VAR
+INICIO
+  // ALEATORIO 1
+  // LEIA(MONSTROY)
+  // LIMPATELA
+   //aleatorio off
 
+  // aleatorio 1
+  // LEIA(XMONSTRO)
+   //LIMPATELA
+   //aleatorio off
+   XMONSTRO<-1
+   MONSTROY<-1
+   ESCOLHA XMONSTRO
+   CASO 1
+      MONSTRO <- "LOBO"
+      MONSTROLEVEL <- MONSTROY
+      MONSTROHP<-5 * MONSTROLEVEL
+      MONSTROHPMAX<- MONSTROHP
+      MONSTROATK<-MONSTROLEVEL+1
+      MONSTRODEF<-MONSTROLEVEL+1
+      MONSTROEXP<-MONSTROLEVEL*2
+      MONSTRODANOMIN<-(MONSTROATK+(MONSTROATK*(25/100)))/2
+      MONSTRODANOMAX<-MONSTROATK+(MONSTROATK*(25/100))
+      LIMPATELA
+      LOBO
+      LEIA(CONTINUAR)
+
+   CASO 2
+
+   CASO 3
+
+   CASO 4
+
+   CASO 5
+
+   CASO 6
+
+   CASO 7
+
+   CASO 8
+
+   OUTROCASO
+      ESCREVAL(">VOCÊ EXPLOROU O ANDAR E NÃO ENCONTROU NADA<")
+      FIMESCOLHA
+
+FIMPROCEDIMENTO
+//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 PROCEDIMENTO PORTAL
 VAR
 INICIO
-escreval("                                                                       __________________________________________________ ")
+   escreval("                                                                       __________________________________________________ ")
    escreval("                                                                      |  |_|___|_ |_|___|__|         |___|___ |_|___|__|  |")
    escreval("                                                                      |  |___|___ |___|___||         |_|___|_ |___|___||  |")
    escreval("                                                                      |  |_|___|_ |_|___|__|         |___|___ |_|___|__|  |")
@@ -669,23 +744,57 @@ escreval("                                                                      
    escreval("                                                                      |                                                   |")
    escreva("                                                                      |>  ")
    PARA A DE 1 ATE 10 FACA
-   ANDAR[A] <- "º ANDAR"
+      ANDAR[A] <- "º ANDAR"
    FIMPARA
    PARA J DE 1 ATE 5 FACA
-   ESCREVA(J,ANDAR[J])
-   J <- J + 1
+      ESCREVA(J,ANDAR[J])
+      J <- J + 1
    FIMPARA
    ESCREVAL("   |")
    escreval("                                                                      |                                                   |")
    escreva("                                                                      |>  ")
    PARA J DE 6 ATE 10 FACA
-   ESCREVA(J,ANDAR[J])
-   J <- J + 1
+      ESCREVA(J,ANDAR[J])
+      J <- J + 1
    FIMPARA
    ESCREVAL("  |")
    escreval("                                                                      |                                                   |")
    escreval("                                                                      | __________________________________________________|")
-LEIA(CONTINUAR)
+   leia(xa)
+   escolha xa
+   caso 1
+      LIMPATELA
+      ANDAR1
+   CASO 2
+      LIMPATELA
+      ANDAR2
+   CASO 3
+      LIMPATELA
+      ANDAR3
+   CASO 4
+      LIMPATELA
+      ANDAR4
+   CASO 5
+      LIMPATELA
+      ANDAR5
+   CASO 6
+      LIMPATELA
+      ANDAR6
+   CASO 7
+      LIMPATELA
+      ANDAR7
+   CASO 8
+      LIMPATELA
+      ANDAR8
+   CASO 9
+      LIMPATELA
+      ANDAR9
+   CASO 10
+      LIMPATELA
+      ANDAR10
+   OUTROCASO
+
+   FIMESCOLHA
 FIMPROCEDIMENTO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -719,78 +828,78 @@ Inicio
       FIMENQUANTO
       //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       ENQUANTO HUB = VERDADEIRO FACA
-      N <- 36
-      C <- 36
-      SE HPJOGADOR > 9 ENTAO
-         H <- 29
-      SENAO
-         H <-30
-      FIMSE
-      SE EXPJOGADOR >9 ENTAO
-         EX <- 29
-      SENAO
-         EX <- 30
-      FIMSE
-      escreval("                                                                _____________________________________________________________________________")
-      escreval("                                                               |_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|")
-      escreval("                                                               |___|____   ____|___|___|___|___|__ _     _ |___|___|___|___|___|_     _|___|_|")
-      escreval("                                                               |_|___|__[2]__|___ ___ ___|___|___|(_)[1](_)_ |___|___|___| | |___|[3]|___|___|")
-      escreval("                                                               |___ ___________  /. .\ |___|___|_ |@(_) |@(_) _|___|___|_ /+\ _|___|___|___|_|")
-      escreval("                                                               |_| /\\\ \\\\\\ /V_.-._\ _|___|___ |@|@|_|@|@| ___|___|__ /+++\ __|___|___|___|")
-      escreval("                                                               || /\\\\/ \\ \\/==\ u |.|___|___|_ \@|@|__\|@| _|___|___| | + |_ _ _ _ _ _  | |")
-      escreval("                                                               |:/\\\\\\-\\\\\====\==|:::::::::::::\|__\\\__|::::::::::::|-+-| U U U U U ::::|")
-      escreval("                                                               |'|----/\u |--|++++|..|'''''''''''::::::::::::::''''''''''|||||+-+-+-+-+-+''''|")
-      escreval("                                                               | |u u|u | |u ||||||..|              '::::::::'           |===|>=== _ _ ==    |")
-      escreval("                                                               | |===|  |u|==|++++|==|              .::::::::.           | H |....| V |..    |")
-      escreval("                                                               | |u u|u | |u ||HH||                .::::::::::.                              |")
-      escreval("                                                               | |===|_.|u|_.|+HH+|_              .::::::::::::.              _              |")
-      escreval("                                                               |                __(_)___         .::::::::::::::.         ___(_)__           |")
-      escreval("                                                               |---------------/  / \  /|       .:::::;;;:::;;:::.       |\  / \  \-------   |")
-      escreval("                                                               |______________/_______/ |      .::::::;;:::::;;:::.      | \_______\________ |")
-      escreval("                                                               ||       |     [===  =] /|     .:::::;;;::::::;;;:::.     |\ [==  = ]   |     |")
-      escreval("                                                               ||_______|_____[ = == ]/ |    .:::::;;;:::::::;;;::::.    | \[ ===  ]___|____ |")
-      escreval("                                                               |     |       |[  === ] /|   .:::::;;;::::::::;;;:::::.   |\ [=  ===] |       |")
-      escreval("                                                               |_____|_______|[== = =]/ |  .:::::;;;::::::::::;;;:::::.  | \[ ==  =]_|______ |")
-      escreval("                                                               | |       |    [ == = ] /| .::::::;;:::::::::::;;;::::::. |\ [== == ]      |  |")
-      escreval("                                                               | |       |    [ == = ] /| .::::::;;:::::::::::;;;::::::. |\ [== == ]      |  |")
-      escreval("                                                               |   |       |  [ === =] /.::::::;;::::::::::::::;;;:::::::.\ [===  =]   |     |")
-      escreval("                                                               |___|_______|__[ == ==]/.::::::;;;:::::::::::::::;;;:::::::.\[=  == ]___|_____|")
-      escreva("                                                               |                                   NOME> ",NOMEJOGADOR)
-      N <- N - TAMANHONOME
-      PARA J DE 1 ATE N FACA
-         ESCREVA(" ")
-      FIMPARA
-      ESCREVAL("|")
-      escreva("                                                               |                                 CLASSE> ",CLASSEJOGADOR)
-      C <- C - TAMANHOCLASSE
-      PARA J DE 1 ATE C FACA
-         ESCREVA(" ")
-      FIMPARA
-      ESCREVAL("|")
-      escreva("                                                               |                                     HP>",HPJOGADOR," /",HPMAXJOGADOR)
-      PARA J DE 1 ATE H FACA
-         ESCREVA(" ")
-      FIMPARA
-      ESCREVAL("|")
-      escreva("                                                               |                                    EXP>",EXPJOGADOR," /",EXPMAXJOGADOR)
-      PARA J DE 1 ATE EX FACA
-         ESCREVA(" ")
-      FIMPARA
-      ESCREVAL("|")
-      escreval("                                                               |_____________________________________________________________________________|")
-      ESCREVAL("                                                                                                >O QUE VAI FAZER<")
-      ESCREVAL("                                                                                 [1]SUBIR A TORRE [2]LOJA/ITENS [3]RECUPERAR VIDA")
-      ESCREVA("                                                                                                         ")
-      LEIA(P)
-      ESCOLHA P
-      CASO 1
-      LIMPATELA
-      PORTAL
-      CASO 2
-      
-      CASO 3
-      
-      FIMESCOLHA
+         N <- 36
+         C <- 36
+         SE HPJOGADOR > 9 ENTAO
+            H <- 29
+         SENAO
+            H <-30
+         FIMSE
+         SE EXPJOGADOR >9 ENTAO
+            EX <- 29
+         SENAO
+            EX <- 30
+         FIMSE
+         escreval("                                                                _____________________________________________________________________________")
+         escreval("                                                               |_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|")
+         escreval("                                                               |___|____   ____|___|___|___|___|__ _     _ |___|___|___|___|___|_     _|___|_|")
+         escreval("                                                               |_|___|__[2]__|___ ___ ___|___|___|(_)[1](_)_ |___|___|___| | |___|[3]|___|___|")
+         escreval("                                                               |___ ___________  /. .\ |___|___|_ |@(_) |@(_) _|___|___|_ /+\ _|___|___|___|_|")
+         escreval("                                                               |_| /\\\ \\\\\\ /V_.-._\ _|___|___ |@|@|_|@|@| ___|___|__ /+++\ __|___|___|___|")
+         escreval("                                                               || /\\\\/ \\ \\/==\ u |.|___|___|_ \@|@|__\|@| _|___|___| | + |_ _ _ _ _ _  | |")
+         escreval("                                                               |:/\\\\\\-\\\\\====\==|:::::::::::::\|__\\\__|::::::::::::|-+-| U U U U U ::::|")
+         escreval("                                                               |'|----/\u |--|++++|..|'''''''''''::::::::::::::''''''''''|||||+-+-+-+-+-+''''|")
+         escreval("                                                               | |u u|u | |u ||||||..|              '::::::::'           |===|>=== _ _ ==    |")
+         escreval("                                                               | |===|  |u|==|++++|==|              .::::::::.           | H |....| V |..    |")
+         escreval("                                                               | |u u|u | |u ||HH||                .::::::::::.                              |")
+         escreval("                                                               | |===|_.|u|_.|+HH+|_              .::::::::::::.              _              |")
+         escreval("                                                               |                __(_)___         .::::::::::::::.         ___(_)__           |")
+         escreval("                                                               |---------------/  / \  /|       .:::::;;;:::;;:::.       |\  / \  \-------   |")
+         escreval("                                                               |______________/_______/ |      .::::::;;:::::;;:::.      | \_______\________ |")
+         escreval("                                                               ||       |     [===  =] /|     .:::::;;;::::::;;;:::.     |\ [==  = ]   |     |")
+         escreval("                                                               ||_______|_____[ = == ]/ |    .:::::;;;:::::::;;;::::.    | \[ ===  ]___|____ |")
+         escreval("                                                               |     |       |[  === ] /|   .:::::;;;::::::::;;;:::::.   |\ [=  ===] |       |")
+         escreval("                                                               |_____|_______|[== = =]/ |  .:::::;;;::::::::::;;;:::::.  | \[ ==  =]_|______ |")
+         escreval("                                                               | |       |    [ == = ] /| .::::::;;:::::::::::;;;::::::. |\ [== == ]      |  |")
+         escreval("                                                               | |       |    [ == = ] /| .::::::;;:::::::::::;;;::::::. |\ [== == ]      |  |")
+         escreval("                                                               |   |       |  [ === =] /.::::::;;::::::::::::::;;;:::::::.\ [===  =]   |     |")
+         escreval("                                                               |___|_______|__[ == ==]/.::::::;;;:::::::::::::::;;;:::::::.\[=  == ]___|_____|")
+         escreva("                                                               |                                   NOME> ",NOMEJOGADOR)
+         N <- N - TAMANHONOME
+         PARA J DE 1 ATE N FACA
+            ESCREVA(" ")
+         FIMPARA
+         ESCREVAL("|")
+         escreva("                                                               |                                 CLASSE> ",CLASSEJOGADOR)
+         C <- C - TAMANHOCLASSE
+         PARA J DE 1 ATE C FACA
+            ESCREVA(" ")
+         FIMPARA
+         ESCREVAL("|")
+         escreva("                                                               |                                     HP>",HPJOGADOR," /",HPMAXJOGADOR)
+         PARA J DE 1 ATE H FACA
+            ESCREVA(" ")
+         FIMPARA
+         ESCREVAL("|")
+         escreva("                                                               |                                    EXP>",EXPJOGADOR," /",EXPMAXJOGADOR)
+         PARA J DE 1 ATE EX FACA
+            ESCREVA(" ")
+         FIMPARA
+         ESCREVAL("|")
+         escreval("                                                               |_____________________________________________________________________________|")
+         ESCREVAL("                                                                                                >O QUE VAI FAZER<")
+         ESCREVAL("                                                                                 [1]SUBIR A TORRE [2]LOJA/ITENS [3]RECUPERAR VIDA")
+         ESCREVA("                                                                                                         ")
+         LEIA(P)
+         ESCOLHA P
+         CASO 1
+            LIMPATELA
+            PORTAL
+         CASO 2
+
+         CASO 3
+
+         FIMESCOLHA
       FIMENQUANTO                                                                                                   ,
       //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
