@@ -1,13 +1,10 @@
 Algoritmo "RPG"
-
 Var
    NOMEJOGADOR,CLASSEJOGADOR:CARACTERE
-   LEVELJOGADOR,TAMANHONOME,TAMANHOCLASSE,TAMANHOEXP,TAMANHOHP:INTEIRO
-   GUERREIRO,ARQUEIRO,MAGO:LOGICO
+   LEVELJOGADOR,TAMANHONOME:INTEIRO
    FOR,DES,INTE,HPJOGADOR,HPMAXJOGADOR,MPJOGADOR,MPMAXJOGADOR,ATKJOGADOR,ACERTO,DEFJOGADOR,EXPJOGADOR,EXPMAXJOGADOR:REAL
    DANOMIN,DANOMAX:REAL
    SKILL1,SKILL2,SKILL3:CARACTERE
-   TAMANHOSKILL1,TAMANHOSKILL2,TAMANHOSKILL3:INTEIRO
 
    MONSTROLEVEL,XMONSTRO,MONSTROY:INTEIRO
    MONSTRO:CARACTERE
@@ -15,18 +12,16 @@ Var
    MONSTRODANOMIN,MONSTRODANOMAX:REAL
    TAMANHOMONSTRO:INTEIRO
 
-   N,C,EX,H,J,P,A,xa,ENCONTRO: INTEIRO
-   F:REAL
    CONTINUAR : CARACTER
 
-   I,HUB:LOGICO
+   HUB:LOGICO
 
    ANDAR:VETOR [1..10] DE INTEIRO
-   ESCOLHAMENUPERSONAGEM:INTEIRO
+   ESCOLHAMENUPERSONAGEM,HOME:INTEIRO
 
    ATAQUE,USOSKILL1,USOSKILL2,USOSKILL3:INTEIRO
    ATAQUEMONSTRO:INTEIRO
-   //ANIMACAO LIVRO\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO ANIMACAO
 INICIO
    TIMER 50
@@ -110,7 +105,7 @@ INICIO
    TIMER 50
    TIMER 0
 FIMPROCEDIMENTO
-//ANIMAÇÃO LIVRO VOLTANDO\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO ANIMACAOX
 INICIO
    TIMER 50
@@ -194,7 +189,7 @@ INICIO
    TIMER 50
    TIMER 0
 FIMPROCEDIMENTO
-//ANIMAÃO LIVRO FECHANDO\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO ANIMACAOY
 INICIO
    LIMPATELA
@@ -246,7 +241,7 @@ INICIO
    TIMER 50
    TIMER 0
 FIMPROCEDIMENTO
-//ANIMAÇÃO CARTAS DA CLASSE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO ANIMACAOCLASSE
 INICIO
    LIMPATELA
@@ -269,7 +264,7 @@ INICIO
    escreval("                                                                          |______\'/______||_____|\ /|_____||______/|\______|")
    ESCREVAL("                                                                                 [1]              [2]              [3]")
 FIMPROCEDIMENTO
-//ANIMAÇÃO TORRE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO TORRE
 INICIO
    LIMPATELA
@@ -321,7 +316,7 @@ INICIO
    escreval("                                                                      |                                                   |")
    escreval("                                                                      | __________________________________________________|")
    ESCREVA("ENTRANDO NA TORRE SEM FIM.")
-   TIMER 50
+   TIMER 70
    TIMER 0
    LIMPATELA
    escreval("                                                                       __________________________________________________ ")
@@ -352,7 +347,7 @@ INICIO
    escreval("                                                                      |                                                   |")
    escreval("                                                                      | __________________________________________________|")
    ESCREVA("ENTRANDO NA TORRE SEM FIM..")
-   TIMER 50
+   TIMER 70
    TIMER 0
    LIMPATELA
    escreval("                                                                       __________________________________________________ ")
@@ -383,7 +378,7 @@ INICIO
    escreval("                                                                      |                      \|   |/                      |")
    escreval("                                                                      | __________________________________________________|")
    ESCREVA("ENTRANDO NA TORRE SEM FIM...")
-   TIMER 50
+   TIMER 70
    TIMER 0
    LIMPATELA
    escreval("                                                                       __________________________________________________ ")
@@ -414,7 +409,7 @@ INICIO
    escreval("                                                                      |                    \         /                    |")
    escreval("                                                                      | __________________________________________________|")
 FIMPROCEDIMENTO
-//ANIMAÇÃO AVISO\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO AVISO
 INICIO
    escreval("                                                                       __________________________________________________ ")
@@ -435,7 +430,7 @@ INICIO
    escreval("                                                                      |                    >OBRIGADO<                    |")
    escreval("                                                                      |__________________________________________________|")
 FIMPROCEDIMENTO
-//ART LIVRO1
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO LIVRO1
 INICIO
    escreval("                                                                ___________________________________________________________________ ")
@@ -449,6 +444,7 @@ INICIO
    escreval("                                                               |.'______________________________\|/______________________________`. |")
    escreval("                                                               |___________________________________________________________________ |")
 FIMPROCEDIMENTO
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO LIVRO2
 INICIO
    escreval("                                                                ___________________________________________________________________ ")
@@ -462,6 +458,7 @@ INICIO
    escreval("                                                               |.'______________________________\|/______________________________`. |")
    escreval("                                                               |___________________________________________________________________ |")
 FIMPROCEDIMENTO
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO LIVRO3
 INICIO
    escreval("                                                                ___________________________________________________________________ ")
@@ -475,9 +472,9 @@ INICIO
    escreval("                                                               |.'______________________________\|/______________________________`. |")
    escreval("                                                               |___________________________________________________________________ |")
 FIMPROCEDIMENTO
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO LOBO
+VAR ENCONTRO:INTEIRO
 INICIO
    escreval("                                                                ____________________________________________________________________")
    ESCREVAL("                                                               |                       >VOCÊ ENCONTROU UM LOBO<                     |")
@@ -501,24 +498,21 @@ INICIO
    ESCREVAL("                                                                                          [1] LUTAR [2] FUGIR")
    ESCREVA("                                                                                                  >")
    LEIA(ENCONTRO)
-ESCOLHA ENCONTRO
+   ESCOLHA ENCONTRO
    CASO 1
       LIMPATELA
       COMBATE
    CASO 2
+      LIMPATELA
       ESCREVAL("                                                                                   VOCÊ FUGIU E RETORNARA À CIDADE!")
       TIMER 100
       TIMER 0
-      LIMPATELA
-FIMESCOLHA
+   FIMESCOLHA
 FIMPROCEDIMENTO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO CRIARPERSONAGEM
-VAR
-   X,Y,J:INTEIRO
-   ADD:CARACTER
+VAR Y,X:INTEIRO
+ADD:CARACTER
 INICIO
    ADD <- " "
    ESCREVAL("                                                                          ___________________________________________________")
@@ -527,15 +521,15 @@ INICIO
    ESCREVAL("                                                                         |(_)/'/'/'/(**)______________________>              |")
    ESCREVA("                                                                         |           )(   NOME:",NOMEJOGADOR)
    SE NOMEJOGADOR <> "" ENTAO
-   ESCREVAL("----------------------|")
+      ESCREVAL("----------------------|")
    SENAO
-   ESCREVAL("------------------------------|")
+      ESCREVAL("------------------------------|")
    FIMSE
    ESCREVA("                                                                         |           \/ CLASSE:",CLASSEJOGADOR)
    SE CLASSEJOGADOR <> "" ENTAO
-   ESCREVAL("---------------------|")
+      ESCREVAL("---------------------|")
    SENAO
-   ESCREVAL("------------------------------|")
+      ESCREVAL("------------------------------|")
    FIMSE
    ESCREVAL("                                                                         |                                                   |")
    ESCREVAL("                                                                         |                 FOR:",FOR,"     HP:",HPJOGADOR:2:0,"------------------|")
@@ -559,24 +553,23 @@ INICIO
       nomejogador <- maiusc(NOMEJOGADOR)
       TAMANHONOME <- COMPR(NOMEJOGADOR)
       SE (TAMANHONOME > 8)ENTAO
-      ESCREVAL("                                                                          NOME INADEQUADO, PRECISA TER ATÉ [8] CARACTERES")
-      ESCREVA("                                                                                               <ENTER>")
-      LEIA(CONTINUAR)
-      LIMPATELA
-      NOMEJOGADOR <- ""
-      TAMANHONOME <- 0
-      CRIARPERSONAGEM
+         ESCREVAL("                                                                          NOME INADEQUADO, PRECISA TER ATÉ [8] CARACTERES")
+         ESCREVA("                                                                                               <ENTER>")
+         LEIA(CONTINUAR)
+         LIMPATELA
+         NOMEJOGADOR <- ""
+         TAMANHONOME <- 0
+         CRIARPERSONAGEM
       SENAO
-      LIMPATELA
-      REPITA
-      SE TAMANHONOME < 8 ENTAO
-      NOMEJOGADOR <- NOMEJOGADOR+ADD
-      TAMANHONOME <- COMPR(NOMEJOGADOR)
+         LIMPATELA
+         REPITA
+            SE TAMANHONOME < 8 ENTAO
+               NOMEJOGADOR <- NOMEJOGADOR+ADD
+               TAMANHONOME <- COMPR(NOMEJOGADOR)
+            FIMSE
+         ATE TAMANHONOME = 8
+         CRIARPERSONAGEM
       FIMSE
-      ATE TAMANHONOME = 8
-      CRIARPERSONAGEM
-      FIMSE
-
    SENAO
       SE (NOMEJOGADOR <> "") E (CLASSEJOGADOR = "") ENTAO
          ANIMACAOCLASSE
@@ -586,7 +579,6 @@ INICIO
          ESCOLHA Y
          CASO 1
             CLASSEJOGADOR <- "GUERREIRO"
-            GUERREIRO <- VERDADEIRO
             FOR<- 3
             DES<- 1
             INTE<-1
@@ -602,15 +594,13 @@ INICIO
             LEVELJOGADOR <- 1
             EXPJOGADOR <- 0
             EXPMAXJOGADOR <- 10*LEVELJOGADOR
-            SKILL1 <- "INVESTIDA"
-            SKILL2 <- "GOLPE PODEROSO"
-            SKILL3 <- "PERFURAR"
+            SKILL1 <- "INVESTIDA    "
+            SKILL2 <- "CORTE CRUZ   "
+            SKILL3 <- "PERFURAR     "
             LIMPATELA
-            TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
             CRIARPERSONAGEM
          CASO 2
             CLASSEJOGADOR <-"ARQUEIRO "
-            ARQUEIRO <- VERDADEIRO
             FOR<- 1
             DES<- 3
             INTE<-1
@@ -626,15 +616,14 @@ INICIO
             LEVELJOGADOR <- 1
             EXPJOGADOR <- 0
             EXPMAXJOGADOR <- 10*LEVELJOGADOR
-            SKILL1 <- "TIRO RAPIDO"
+            SKILL1 <- "TIRO RAPIDO  "
             SKILL2 <- "TIRO PODEROSO"
-            SKILL3 <- "ACERTO CRITICO"
+            SKILL3 <- "TIRO CRITICO "
             LIMPATELA
-            TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
             CRIARPERSONAGEM
          CASO 3
             CLASSEJOGADOR <- "MAGO     "
-            MAGO <- VERDADEIRO
+
             FOR<- 1
             DES<- 1
             INTE<-3
@@ -651,15 +640,11 @@ INICIO
             EXPJOGADOR <- 0
             EXPMAXJOGADOR <- 10*LEVELJOGADOR
             SKILL1 <- "LANÇA DE GELO"
-            SKILL2 <- "TROVÃO"
-            SKILL3 <- "BOLA DE FOGO"
+            SKILL2 <- "TROVÃO        "
+            SKILL3 <- "BOLA DE FOGO  "
             LIMPATELA
-            TAMANHOCLASSE <- COMPR(CLASSEJOGADOR)
             CRIARPERSONAGEM
          FIMESCOLHA
-         TAMANHOSKILL1 <- COMPR(SKILL1)
-         TAMANHOSKILL2<- COMPR(SKILL2)
-         TAMANHOSKILL3 <-COMPR(SKILL3)
       SENAO
          SE (NOMEJOGADOR <> "") E (CLASSEJOGADOR <> "") ENTAO
             LIVRO3
@@ -673,10 +658,6 @@ INICIO
                NOMEJOGADOR <- ""
                TAMANHONOME <- 0
                CLASSEJOGADOR <- ""
-               TAMANHOCLASSE <- 0
-               GUERREIRO <- FALSO
-               ARQUEIRO <- FALSO
-               MAGO <- FALSO
                FOR<- 0
                DES<- 0
                INTE<-0
@@ -703,7 +684,7 @@ INICIO
       FIMSE
    FIMSE
 FIMPROCEDIMENTO
-//||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO ANDAR1
 VAR ADD:CARACTERE
 INICIO
@@ -723,10 +704,10 @@ INICIO
       MONSTRO <- "LOBO"
       TAMANHOMONSTRO <- COMPR(MONSTRO)
       REPITA
-      SE TAMANHOMONSTRO < 8 ENTAO
-      MONSTRO <- MONSTRO+ADD
-      TAMANHOMONSTRO <- COMPR(MONSTRO)
-      FIMSE
+         SE TAMANHOMONSTRO < 8 ENTAO
+            MONSTRO <- MONSTRO+ADD
+            TAMANHOMONSTRO <- COMPR(MONSTRO)
+         FIMSE
       ATE TAMANHOMONSTRO = 8
       MONSTROLEVEL <- MONSTROY
       MONSTROHP<-5 * MONSTROLEVEL
@@ -756,10 +737,14 @@ INICIO
       ESCREVAL(">VOCÊ EXPLOROU O ANDAR E NÃO ENCONTROU NADA<")
    FIMESCOLHA
 FIMPROCEDIMENTO
-//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO PORTAL
-VAR
+VAR F:REAL
+J,A,XA:INTEIRO
 INICIO
+   PARA A DE 1 ATE 10 FACA
+      ANDAR[A] <- A
+   FIMPARA
    escreval("                                                                       __________________________________________________ ")
    escreval("                                                                      |  |_|___|_ |_|___|__|         |___|___ |_|___|__|  |")
    escreval("                                                                      |  |___|___ |___|___||         |_|___|_ |___|___||  |")
@@ -790,9 +775,6 @@ INICIO
    escreval("                                                                      |                                                   |")
    escreval("                                                                      |                                                   |")
    escreval("                                                                      | __________________________________________________|")
-   PARA A DE 1 ATE 10 FACA
-      ANDAR[A] <- A
-   FIMPARA
    ESCREVAL("                                                                       >[ 1 ]TERREO")
    F <- LEVELJOGADOR/10 + 1
    J <- INT(F)
@@ -810,9 +792,7 @@ INICIO
 FIMPROCEDIMENTO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO COMBATE
-VAR
-   Q,W,R,S,T:INTEIRO
-   COMBATE:INTEIRO
+VAR COMBATE:INTEIRO
 INICIO
    escreval("                                                                ____________________________________________________________________")
    ESCREVAL("                                                               |                                                                     |")
@@ -835,24 +815,10 @@ INICIO
    SE LEVELJOGADOR >=10 ENTAO
       ESCREVA(SKILL2)
    SENAO
-      ESCREVA("VAZIO         ")
+      ESCREVA("VAZIO         |")
    FIMSE
-   R <- 14
-   R<-R - TAMANHOSKILL2
-   PARA T DE 1 ATE R FACA
-      ESCREVA(" ")
-   FIMPARA
-   ESCREVA("|")
    se ataque <> 0 entao
-      ESCREVA(">VOCÊ CAUSOU",ATAQUE:5:0," DE DANO!")
-      R <- 11
-      SE ATAQUE>9 ENTAO
-         R<- R-1
-      FIMSE
-      PARA T DE 1 ATE R FACA
-         ESCREVA(" ")
-      FIMPARA
-      ESCREVAL("|")
+      ESCREVAL(">VOCÊ CAUSOU",ATAQUE:3:0," DE DANO!          |")
    SENAO
       ESCREVAL("                                  |")
    FIMSE
@@ -861,41 +827,23 @@ INICIO
    SE LEVELJOGADOR >= 5 entao
       ESCREVA(SKILL1)
    SENAO
-      ESCREVA("VAZIO    ")
+      ESCREVA("VAZIO        ")
    FIMSE
-   Q <- 13
-   Q <- Q - TAMANHOSKILL1
-   PARA T DE 1 ATE Q FACA
-      ESCREVA(" ")
-   FIMPARA
    ESCREVA("[4]")
    SE LEVELJOGADOR >= 15 ENTAO
       ESCREVA(SKILL3)
    SENAO
-      ESCREVA("VAZIO")
+      ESCREVA("VAZIO         ")
    FIMSE
-   R <- 14
-   R<-R - TAMANHOSKILL3
-   PARA T DE 1 ATE R FACA
-      ESCREVA(" ")
-   FIMPARA
    ESCREVA("|")
    SE ATAQUEMONSTRO <> 0 ENTAO
-      ESCREVA(">VOCÊ RECEBEU",ATAQUEMONSTRO," DE DANO!")
-      R <- 10
-      SE ATAQUEMONSTRO>9 ENTAO
-         R<- R-1
-      FIMSE
-      PARA T DE 1 ATE R FACA
-         ESCREVA(" ")
-      FIMPARA
-      ESCREVAL("|")
+      ESCREVAL(">VOCÊ RECEBEU",ATAQUEMONSTRO:3:0," DE DANO!         |")
    SENAO
       ESCREVAL("                                  |")
    FIMSE
    ATAQUE <- 0
    ATAQUEMONSTRO <-0
-   escreval("                                                               |__________________________________|__________________________________|")
+   ESCREVAL("                                                               |__________________________________|__________________________________|")
    SE (MONSTROHP>0) E (HPJOGADOR>0)ENTAO
       escreval("                                                                                          >O QUE VAI FAZER<")
       ESCREVA("                                                                                                     ")
@@ -958,7 +906,7 @@ INICIO
       FIMSE
    FIMSE
 FIMPROCEDIMENTO
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 PROCEDIMENTO EXPERIENCIA
 INICIO
    LIMPATELA
@@ -1019,8 +967,6 @@ INICIO
       FIMSE
    FIMSE
 FIMPROCEDIMENTO
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Inicio
    //   AVISO
@@ -1042,25 +988,12 @@ Inicio
          //ANIMACAOY
       FIMSE
       SE (ESCOLHAMENUPERSONAGEM = 2) ENTAO
-         I <- FALSO
          LIMPATELA
       FIMSE
       LIMPATELA
    FIMENQUANTO
    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ENQUANTO HUB = VERDADEIRO FACA
-      N <- 12
-      C <- 12
-      SE HPJOGADOR > 9 ENTAO
-         H <- 29
-      SENAO
-         H <-30
-      FIMSE
-      SE EXPJOGADOR >9 ENTAO
-         EX <- 29
-      SENAO
-         EX <- 30
-      FIMSE
+   ENQUANTO HUB = VERDADEIRO FACA
       escreval("                                                                _____________________________________________________________________________")
       escreval("                                                               |_|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|___|")
       escreval("                                                               |___|____   ____|___|___|___|___|__ _     _ |___|___|___|___|___|_     _|___|_|")
@@ -1094,9 +1027,8 @@ ENQUANTO HUB = VERDADEIRO FACA
       ESCREVAL("                                                                                                >O QUE VAI FAZER<")
       ESCREVAL("                                                                                 [1]SUBIR A TORRE [2]LOJA/ITENS [3]RECUPERAR VIDA")
       ESCREVA("                                                                                                         ")
-      LEIA(P)
-
-      ESCOLHA P
+      LEIA(HOME)
+      ESCOLHA HOME
       CASO 1
          LIMPATELA
          PORTAL
@@ -1105,9 +1037,8 @@ ENQUANTO HUB = VERDADEIRO FACA
       CASO 3
 
       FIMESCOLHA
-FIMENQUANTO                                                                                                   ,
+   FIMENQUANTO                                                                                                   ,
    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
    ESCREVA("                                                                             TEM CERTEZA QUE DESEJA SAIR<S/N>")
    LEIA(CONTINUAR)
    SE (CONTINUAR = "N") OU (CONTINUAR ="n") ENTAO
@@ -1119,5 +1050,4 @@ FIMENQUANTO                                                                     
          ESCREVAL(                                                                              "OBRIGADO POR JOGAR")
       FIMSE
    FIMSE
-
 Fimalgoritmo
